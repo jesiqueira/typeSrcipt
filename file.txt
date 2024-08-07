@@ -1,0 +1,18 @@
+npm intall -g typescript
+
+verificar se está instalado
+tsc --> precione ENTER
+
+criar arquivo tsconfig.json
+
+tsc --init
+
+{
+  "compilerOptions":{
+    "target": "ESNext",
+    "strict": true
+  }
+}
+
+Compilar e ficar observando o arquivo.
+tsc -w
