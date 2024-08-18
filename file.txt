@@ -16,3 +16,5 @@ tsc --init
 
 Compilar e ficar observando o arquivo.
 tsc -w
+
+https://api.origamid.dev/json/cursos.json

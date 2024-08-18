@@ -1,20 +1,40 @@
-function normalizarTexto(texto: string) {
-  return texto.trim().toLowerCase();
+async function fetchCursos() {
+  const response = await fetch('https://api.origamid.dev/json/cursos.json');
+  const data = await response.json();
+
+  mostrarCursos(data);
 }
 
-console.log(normalizarTexto('EdMar'));
+fetchCursos();
 
-const frase = 'Front End';
-const preco = 500;
-const cond = preco > 100;
+interface Curso {
+  nome: string;
+  aulas: number;
+  gratuito: boolean;
+  horas: number;
+  idAulas: number[];
+  tags: string[];
+  nivel: 'iniciante' | 'avancado';
+}
 
-console.log(typeof frase);
-console.log(typeof preco);
-console.log(typeof {});
-console.log(typeof null);
+function mostrarCursos(cursos: Curso[]) {
+  cursos.forEach((curso) => {
+    let color;
+    if (curso.nivel === 'iniciante') {
+      color = 'blue';
+    } else if (curso.nivel === 'avancado') {
+      color = 'red';
+    }
 
-if (typeof frase === 'string') {
-  console.log('Frase é uma string');
-} else {
-  console.log('Frase não é uma string');
+    document.body.innerHTML += `
+      <div>
+        <h2 style="color: ${color};">${curso.nome}</h2>
+        <p>Horas: ${curso.horas}</p>
+        <p>Aulas: ${curso.aulas}</p>
+        <p>Tipo: ${curso.gratuito ? 'Gratuito' : 'Pago'}</p>
+        <p>Tags: ${curso.tags.join(',')}</p>
+        <p>Tags: ${curso.idAulas.join(' | ')}</p>
+      </div>
+    `;
+  });
 }
